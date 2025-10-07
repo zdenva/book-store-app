@@ -4,7 +4,7 @@ set -e
 set -x
 
 # Let the DB start
-python book_store/backend_pre_start.py
+python bookstore/backend_pre_start.py
 
 # Create initial data in DB
-python book_store/initial_data.py
+python bookstore/initial_data.py

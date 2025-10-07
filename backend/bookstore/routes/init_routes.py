@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from book_store.routes import utils
+from bookstore.routes import utils
 
 router = APIRouter()
 

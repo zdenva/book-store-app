@@ -2,7 +2,7 @@ from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 from sqlalchemy import text
 
-from book_store.core.deps import SessionDep
+from bookstore.core.deps import SessionDep
 
 router = APIRouter(prefix="/utils", tags=["utils"])
 

@@ -2,13 +2,13 @@ FROM python:3.12
 
 ENV PYTHONUNBUFFERED=1
 
-WORKDIR /book_store/
+WORKDIR /bookstore/
 
 # Install uv
 # Ref: https://docs.astral.sh/uv/guides/integration/docker/#installing-uv
 COPY --from=ghcr.io/astral-sh/uv:0.5.11 /uv /uvx /bin/
 
-ENV PATH="/book_store/.venv/bin:$PATH"
+ENV PATH="/bookstore/.venv/bin:$PATH"
 
 # Compile bytecode
 # Ref: https://docs.astral.sh/uv/guides/integration/docker/#compiling-bytecode
@@ -25,18 +25,18 @@ RUN --mount=type=cache,target=/root/.cache/uv \
     --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
     uv sync --frozen --no-install-project
 
-ENV PYTHONPATH=/book_store
+ENV PYTHONPATH=/bookstore
 
-COPY ./scripts /book_store/scripts
+COPY ./scripts /bookstore/scripts
 
-COPY ./pyproject.toml ./uv.lock /book_store/
+COPY ./pyproject.toml ./uv.lock /bookstore/
 
-# COPY ./tests /book_store/tests
+# COPY ./tests /bookstore/tests
 
-COPY ./book_store /book_store/book_store
+COPY ./bookstore /bookstore/bookstore
 
 
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync
 
-CMD ["fastapi", "run", "--workers", "4", "book_store/main.py"]
+CMD ["fastapi", "run", "--workers", "4", "bookstore/main.py"]

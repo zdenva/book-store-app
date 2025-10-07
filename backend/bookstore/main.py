@@ -2,8 +2,8 @@ from fastapi import FastAPI
 from fastapi.routing import APIRoute
 from starlette.middleware.cors import CORSMiddleware
 
-from book_store.core.config import settings
-from book_store.routes.init_routes import router
+from bookstore.core.config import settings
+from bookstore.routes.init_routes import router
 
 
 def custom_generate_unique_id(route: APIRoute) -> str:

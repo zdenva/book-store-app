@@ -4,7 +4,7 @@ from typing import Annotated
 from fastapi import Depends
 from sqlmodel import Session
 
-from book_store.core.db import engine
+from bookstore.core.db import engine
 
 
 def get_db() -> Generator[Session, None, None]:

@@ -2,7 +2,7 @@ import logging
 
 from sqlmodel import Session
 
-from book_store.core.db import engine, init_db
+from bookstore.core.db import engine, init_db
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

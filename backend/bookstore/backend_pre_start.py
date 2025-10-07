@@ -3,7 +3,7 @@ import logging
 from sqlalchemy import Engine
 from sqlmodel import Session, select
 
-from book_store.core.db import engine
+from bookstore.core.db import engine
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -11,8 +11,8 @@ logger = logging.getLogger(__name__)
 
 def init(db_engine: Engine) -> None:
     try:
-        # Try to create session to check if DB is awake
         with Session(db_engine) as session:
+            # Try to create session to check if DB is awake
             session.exec(select(1))
     except Exception as e:
         logger.error(e)

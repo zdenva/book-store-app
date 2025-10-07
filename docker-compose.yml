@@ -9,7 +9,7 @@ services:
       start_period: 30s
       timeout: 10s
     volumes:
-      - book_store-db-data:/var/lib/postgresql/data/pgdata
+      - bookstore-db-data:/var/lib/postgresql/data/pgdata
     env_file:
       - .env
     environment:
@@ -90,4 +90,4 @@ services:
       context: ./backend
 
 volumes:
-  book_store-db-data:
+  bookstore-db-data:
