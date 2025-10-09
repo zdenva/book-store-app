@@ -9,4 +9,4 @@ class Language(SQLModel, table=True):
     name: str = Field(max_length=255)
     code: str = Field(max_length=2)
 
-    book: Optional["Book"] = Relationship(back_populates="language")
+    books: list["Book"] = Relationship(back_populates="language")

@@ -22,9 +22,7 @@ class Book(SQLModel, table=True):
         back_populates="books", link_model=BookAuthor
     )
 
-    languages: list["Language"] = Relationship(back_populates="books")
-    publishers: list["Publisher"] = Relationship(back_populates="books")
-    inventory_movements: Optional["InventoryMovement"] = Relationship(
-        back_populates="book"
-    )
+    language: Optional["Language"] = Relationship(back_populates="books")
+    publisher: Optional["Publisher"] = Relationship(back_populates="books")
+    inventory_movements: list["InventoryMovement"] = Relationship(back_populates="book")
     inventory: "Inventory" = Relationship(back_populates="book")

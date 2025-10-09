@@ -12,4 +12,4 @@ class InventoryMovement(SQLModel, table=True):
     change: int
     movement_date: datetime = Field(default_factory=datetime.utcnow)
 
-    book: list["Book"] = Relationship(back_populates="inventory_movements")
+    book: Optional["Book"] = Relationship(back_populates="inventory_movements")
