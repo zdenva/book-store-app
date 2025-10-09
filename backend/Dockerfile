@@ -34,6 +34,7 @@ COPY ./pyproject.toml ./uv.lock /bookstore/
 # COPY ./tests /bookstore/tests
 
 COPY ./bookstore /bookstore/bookstore
+COPY ./tests /bookstore/tests
 
 
 RUN --mount=type=cache,target=/root/.cache/uv \

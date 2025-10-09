@@ -11,12 +11,15 @@ dependencies = [
     "sqlmodel>=0.0.25",
     "starlette>=0.48.0",
     "sqlalchemy>=2.0.43",
-    "psycopg>=3.2.10",
+    "psycopg[binary]>=3.2.10",
     "sqlalchemy-utils>=0.42.0",
 ]
 
 [dependency-groups]
-dev = ["coverage>=7.10.7", "pytest>=8.4.2"]
+dev = [
+    "coverage>=7.10.7",
+    "pytest>=8.4.2",
+]
 
 [tool.ruff]
 line-length = 88

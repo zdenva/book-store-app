@@ -61,6 +61,8 @@ services:
       - "8000:8000"
     networks:
       - default
+    volumes:
+      - ./htmlcov:/bookstore/htmlcov
     depends_on:
       db:
         condition: service_healthy
