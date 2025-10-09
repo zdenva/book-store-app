@@ -67,5 +67,5 @@ def remove_language(language_id: str, session: SessionDep = SessionDep):
 
     return LanguageDelete(
         id=deleted_language.id,
-        message=f"Language '{deleted_language.first_name} {deleted_language.last_name}' was successfully deleted",
+        message=f"Language '{deleted_language.name}' was successfully deleted",
     )
