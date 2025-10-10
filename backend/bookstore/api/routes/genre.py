@@ -61,7 +61,7 @@ def edit_genre(session: SessionDep, genre_id: str, genre_in: GenreUpdate):
     return GenreRead.from_orm(genre)
 
 
-@router.delete("/(genre_id)", response_model=GenreDelete)
+@router.delete("/{genre_id}", response_model=GenreDelete)
 def remove_genre(genre_id: str, session: SessionDep = SessionDep):
     """Delete an genre by ID."""
     deleted_genre = delete_genre(session=session, genre_id=genre_id)

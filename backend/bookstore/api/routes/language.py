@@ -62,7 +62,7 @@ def edit_language(session: SessionDep, language_id: str, language_in: LanguageUp
     return LanguageRead.from_orm(language)
 
 
-@router.delete("/(language_id)", response_model=LanguageDelete)
+@router.delete("/{language_id}", response_model=LanguageDelete)
 def remove_language(language_id: str, session: SessionDep = SessionDep):
     """Delete an language by ID."""
     deleted_language = delete_language(session=session, language_id=language_id)
