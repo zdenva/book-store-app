@@ -3,6 +3,7 @@ from fastapi import APIRouter, HTTPException
 from bookstore.db.crud.book.genre import (
     create_genre,
     delete_genre,
+    get_count_genres,
     get_genre,
     get_genres,
     update_genre,
@@ -12,16 +13,19 @@ from bookstore.db.schemas.book.genre import (
     GenreCreate,
     GenreDelete,
     GenreRead,
+    GenresPublic,
     GenreUpdate,
 )
 
 router = APIRouter(prefix="/genres", tags=["genres"])
 
 
-@router.get("/", response_model=list[GenreRead])
+@router.get("/", response_model=GenresPublic)
 def read_genres(skip: int = 0, limit: int = 100, session: SessionDep = SessionDep):
     """Get genres."""
-    return get_genres(session=session, skip=skip, limit=limit)
+    genres = get_genres(session=session, skip=skip, limit=limit)
+    count = get_count_genres(session=session)
+    return GenresPublic(data=genres, count=count)
 
 
 @router.get("/{genre_id}", response_model=GenreRead)

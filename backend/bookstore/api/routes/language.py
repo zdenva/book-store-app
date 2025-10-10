@@ -3,6 +3,7 @@ from fastapi import APIRouter, HTTPException
 from bookstore.db.crud.book.language import (
     create_language,
     delete_language,
+    get_count_languages,
     get_language,
     get_languages,
     update_language,
@@ -12,16 +13,19 @@ from bookstore.db.schemas.book.language import (
     LanguageCreate,
     LanguageDelete,
     LanguageRead,
+    LanguagesPublic,
     LanguageUpdate,
 )
 
 router = APIRouter(prefix="/languages", tags=["languages"])
 
 
-@router.get("/", response_model=list[LanguageRead])
+@router.get("/", response_model=LanguagesPublic)
 def read_languages(skip: int = 0, limit: int = 100, session: SessionDep = SessionDep):
     """Get languages."""
-    return get_languages(session=session, skip=skip, limit=limit)
+    languages = get_languages(session=session, skip=skip, limit=limit)
+    count = get_count_languages(session=session)
+    return LanguagesPublic(data=languages, count=count)
 
 
 @router.get("/{language_id}", response_model=LanguageRead)

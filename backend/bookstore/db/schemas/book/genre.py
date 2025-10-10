@@ -23,3 +23,8 @@ class GenreRead(BaseModel):
 class GenreDelete(BaseModel):
     id: uuid.UUID
     message: str
+
+
+class GenresPublic(BaseModel):
+    data: list[GenreRead]
+    count: int

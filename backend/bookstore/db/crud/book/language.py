@@ -2,6 +2,7 @@ from uuid import UUID
 
 from sqlmodel import Session, select
 
+from bookstore.db.crud.utils import get_count
 from bookstore.db.models.book.language import Language
 from bookstore.db.schemas.book.language import LanguageCreate
 
@@ -54,3 +55,8 @@ def delete_language(session: Session, language_id) -> Language:
     session.delete(language)
     session.commit()
     return language
+
+
+def get_count_languages(session: Session) -> int:
+    """Get total count of genre rows in table."""
+    return get_count(session=session, model=Language)

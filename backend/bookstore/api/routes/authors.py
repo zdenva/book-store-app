@@ -6,6 +6,7 @@ from bookstore.db.crud.book.author import (
     delete_author,
     get_author,
     get_authors,
+    get_count_authors,
     update_author,
 )
 from bookstore.db.deps import SessionDep
@@ -25,8 +26,7 @@ router = APIRouter(prefix="/authors", tags=["authors"])
 def read_authors(skip: int = 0, limit: int = 100, session: SessionDep = SessionDep):
     """Get authors."""
     authors = get_authors(session=session, skip=skip, limit=limit)
-    count_statement = select(func.count()).select_from(Author)
-    count = session.exec(count_statement).first()
+    count = get_count_authors(session=session)
     return AuthorsPublic(data=authors, count=count)
 
 

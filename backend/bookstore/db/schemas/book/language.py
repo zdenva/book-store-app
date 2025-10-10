@@ -26,3 +26,8 @@ class LanguageRead(BaseModel):
 class LanguageDelete(BaseModel):
     id: uuid.UUID
     message: str
+
+
+class LanguagesPublic(BaseModel):
+    data: list[LanguageRead]
+    count: int

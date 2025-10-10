@@ -2,6 +2,7 @@ from uuid import UUID
 
 from sqlmodel import Session, select
 
+from bookstore.db.crud.utils import get_count
 from bookstore.db.models.book.author import Author
 from bookstore.db.schemas.book.author import AuthorCreate
 
@@ -54,3 +55,8 @@ def delete_author(session: Session, author_id) -> Author:
     session.delete(author)
     session.commit()
     return author
+
+
+def get_count_authors(session: Session) -> int:
+    """Get total count of author rows in table."""
+    return get_count(session=session, model=Author)
