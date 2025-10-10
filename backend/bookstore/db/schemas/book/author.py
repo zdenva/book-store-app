@@ -1,5 +1,5 @@
 import uuid
-from typing import Optional
+from typing import List, Optional
 
 from pydantic import BaseModel
 
@@ -26,3 +26,8 @@ class AuthorRead(BaseModel):
 class AuthorDelete(BaseModel):
     id: uuid.UUID
     message: str
+
+
+class AuthorsPublic(BaseModel):
+    data: List[AuthorRead]
+    count: int

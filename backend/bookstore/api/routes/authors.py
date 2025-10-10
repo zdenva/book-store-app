@@ -1,4 +1,5 @@
 from fastapi import APIRouter, HTTPException
+from sqlmodel import func, select
 
 from bookstore.db.crud.book.author import (
     create_author,
@@ -8,20 +9,25 @@ from bookstore.db.crud.book.author import (
     update_author,
 )
 from bookstore.db.deps import SessionDep
+from bookstore.db.models.book.author import Author
 from bookstore.db.schemas.book.author import (
     AuthorCreate,
     AuthorDelete,
     AuthorRead,
+    AuthorsPublic,
     AuthorUpdate,
 )
 
 router = APIRouter(prefix="/authors", tags=["authors"])
 
 
-@router.get("/", response_model=list[AuthorRead])
+@router.get("/", response_model=AuthorsPublic)
 def read_authors(skip: int = 0, limit: int = 100, session: SessionDep = SessionDep):
     """Get authors."""
-    return get_authors(session=session, skip=skip, limit=limit)
+    authors = get_authors(session=session, skip=skip, limit=limit)
+    count_statement = select(func.count()).select_from(Author)
+    count = session.exec(count_statement).first()
+    return AuthorsPublic(data=authors, count=count)
 
 
 @router.get("/{author_id}", response_model=AuthorRead)
@@ -58,7 +64,7 @@ def edit_author(session: SessionDep, author_id: str, author_in: AuthorUpdate):
     return AuthorRead.from_orm(author)
 
 
-@router.delete("/(author_id)", response_model=AuthorDelete)
+@router.delete("/{author_id}", response_model=AuthorDelete)
 def remove_author(author_id: str, session: SessionDep = SessionDep):
     """Delete an author by ID."""
     deleted_author = delete_author(session=session, author_id=author_id)
