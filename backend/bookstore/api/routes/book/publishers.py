@@ -1,3 +1,5 @@
+from uuid import UUID
+
 from fastapi import APIRouter, HTTPException
 
 from bookstore.db.crud.book.publisher import (
@@ -29,7 +31,7 @@ def read_publishers(skip: int = 0, limit: int = 100, session: SessionDep = Sessi
 
 
 @router.get("/{publisher_id}", response_model=PublisherRead)
-def read_publisher(publisher_id: str, session: SessionDep = SessionDep):
+def read_publisher(publisher_id: UUID, session: SessionDep = SessionDep):
     """Get a publisher by ID."""
     publisher = get_publisher(session=session, publisher_id=publisher_id)
     if not publisher:
@@ -48,23 +50,22 @@ def add_publisher(publisher_in: PublisherCreate, session: SessionDep = SessionDe
 
 @router.patch("/{publisher_id}", response_model=PublisherRead)
 def edit_publisher(
-    session: SessionDep, publisher_id: str, publisher_in: PublisherUpdate
+    session: SessionDep, publisher_id: UUID, publisher_in: PublisherUpdate
 ):
     """
     Update a publisher by ID.
     """
     publisher = update_publisher(
-        session=session,
-        publisher_id=publisher_id,
-        name=publisher_in.name,
+        session=session, publisher_id=publisher_id, publisher_in=publisher_in
     )
+
     if not publisher:
         raise HTTPException(status_code=404, detail="Publisher not found")
     return PublisherRead.from_orm(publisher)
 
 
 @router.delete("/{publisher_id}", response_model=PublisherDelete)
-def remove_publisher(publisher_id: str, session: SessionDep = SessionDep):
+def remove_publisher(publisher_id: UUID, session: SessionDep = SessionDep):
     """Delete a publisher by ID."""
     deleted_publisher = delete_publisher(session=session, publisher_id=publisher_id)
     if not deleted_publisher:

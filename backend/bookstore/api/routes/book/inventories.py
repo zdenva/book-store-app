@@ -1,3 +1,5 @@
+from uuid import UUID
+
 from fastapi import APIRouter, HTTPException
 
 from bookstore.db.crud.book.inventory import (
@@ -25,7 +27,7 @@ def read_inventories(skip: int = 0, limit: int = 100, session: SessionDep = Sess
 
 
 @router.get("/{book_id}", response_model=InventoryRead)
-def read_inventory(book_id: str, session: SessionDep = SessionDep):
+def read_inventory(book_id: UUID, session: SessionDep = SessionDep):
     """Get an inventory by ID."""
     inventory = get_inventory(session=session, book_id=book_id)
     if not inventory:
@@ -34,14 +36,14 @@ def read_inventory(book_id: str, session: SessionDep = SessionDep):
 
 
 @router.patch("/{book_id}", response_model=InventoryRead)
-def edit_inventories(session: SessionDep, book_id: str, inventory_in: InventoryUpdate):
+def edit_inventory(session: SessionDep, book_id: UUID, inventory_in: InventoryUpdate):
     """
     Update an inventory by ID.
     """
     inventory = update_inventory(
         session=session,
         book_id=book_id,
-        quantity=inventory_in.quantity,
+        inventory_in=inventory_in,
     )
     if not inventory:
         raise HTTPException(status_code=404, detail="Inventory not found")

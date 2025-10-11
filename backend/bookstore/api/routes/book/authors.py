@@ -1,3 +1,5 @@
+from uuid import UUID
+
 from fastapi import APIRouter, HTTPException
 
 from bookstore.db.crud.book.author import (
@@ -29,7 +31,7 @@ def read_authors(skip: int = 0, limit: int = 100, session: SessionDep = SessionD
 
 
 @router.get("/{author_id}", response_model=AuthorRead)
-def read_author(author_id: str, session: SessionDep = SessionDep):
+def read_author(author_id: UUID, session: SessionDep = SessionDep):
     """Get an author by ID."""
     author = get_author(session=session, author_id=author_id)
     if not author:
@@ -47,23 +49,18 @@ def add_author(author_in: AuthorCreate, session: SessionDep = SessionDep):
 
 
 @router.patch("/{author_id}", response_model=AuthorRead)
-def edit_author(session: SessionDep, author_id: str, author_in: AuthorUpdate):
+def edit_author(session: SessionDep, author_id: UUID, author_in: AuthorUpdate):
     """
     Update an author by ID.
     """
-    author = update_author(
-        session=session,
-        author_id=author_id,
-        first_name=author_in.first_name,
-        last_name=author_in.last_name,
-    )
+    author = update_author(session=session, author_id=author_id, author_in=author_in)
     if not author:
         raise HTTPException(status_code=404, detail="Author not found")
     return AuthorRead.from_orm(author)
 
 
 @router.delete("/{author_id}", response_model=AuthorDelete)
-def remove_author(author_id: str, session: SessionDep = SessionDep):
+def remove_author(author_id: UUID, session: SessionDep = SessionDep):
     """Delete an author by ID."""
     deleted_author = delete_author(session=session, author_id=author_id)
     if not deleted_author:

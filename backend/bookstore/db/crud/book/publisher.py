@@ -2,9 +2,14 @@ from uuid import UUID
 
 from sqlmodel import Session, select
 
-from bookstore.db.crud.utils import get_count
+from bookstore.db.crud.utils import (
+    get_count,
+    instance_create,
+    instance_delete,
+    instance_update,
+)
 from bookstore.db.models.book.publisher import Publisher
-from bookstore.db.schemes.book.publisher import PublisherCreate
+from bookstore.db.schemes.book.publisher import PublisherCreate, PublisherUpdate
 
 
 def get_publishers(
@@ -12,11 +17,12 @@ def get_publishers(
 ) -> list[Publisher]:
     """Get publishers."""
     statement = select(Publisher).offset(skip).limit(limit)
-    return session.exec(statement).all()
+    publisher = session.exec(statement).all()
+    return publisher
 
 
 def get_publisher(session: Session, publisher_id: UUID) -> Publisher | None:
-    """Get an publisher by ID."""
+    """Get a publisher by ID."""
     publisher = session.get(Publisher, publisher_id)
     if not publisher:
         return None
@@ -25,39 +31,31 @@ def get_publisher(session: Session, publisher_id: UUID) -> Publisher | None:
 
 def create_publisher(session: Session, publisher_in: PublisherCreate) -> Publisher:
     """Create a new publisher."""
-    publisher = Publisher(**publisher_in.dict())
-
-    session.add(publisher)
-    session.commit()
-    session.refresh(publisher)
-
-    return publisher
+    publisher_created = instance_create(
+        session=session, model=Publisher, schema_in=publisher_in
+    )
+    return publisher_created
 
 
 def update_publisher(
-    session: Session, publisher_id: str, name: str
+    session: Session, publisher_id: UUID, publisher_in: PublisherUpdate
 ) -> Publisher | None:
-    """Update an publisher by ID."""
+    """Update a publisher by ID."""
     publisher = get_publisher(session=session, publisher_id=publisher_id)
-    if not publisher:
-        return None
-    publisher.name = name
-    session.add(publisher)
-    session.commit()
-    session.refresh(publisher)
-    return publisher
+    publisher_updated = instance_update(
+        session=session, instance=publisher, schema_in=publisher_in
+    )
+    return publisher_updated
 
 
-def delete_publisher(session: Session, publisher_id) -> Publisher:
-    """Delete an publisher by ID."""
+def delete_publisher(session: Session, publisher_id: UUID) -> Publisher:
+    """Delete a publisher by ID."""
     publisher = get_publisher(session=session, publisher_id=publisher_id)
-    if not publisher:
-        return None
-    session.delete(publisher)
-    session.commit()
-    return publisher
+    publisher_deleted = instance_delete(session=session, instance=publisher)
+    return publisher_deleted
 
 
 def get_count_publishers(session: Session) -> int:
     """Get total count of publisher rows in table."""
-    return get_count(session=session, model=Publisher)
+    count = get_count(session=session, model=Publisher)
+    return count
