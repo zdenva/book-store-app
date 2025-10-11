@@ -10,6 +10,7 @@ from bookstore.api.routes.book import (
     language,
     publishers,
 )
+from bookstore.api.routes.payment import currency
 
 router = APIRouter()
 
@@ -21,3 +22,4 @@ router.include_router(publishers.router)
 router.include_router(inventories.router)
 router.include_router(book_prices.router)
 router.include_router(inventory_movements.router)
+router.include_router(currency.router)
