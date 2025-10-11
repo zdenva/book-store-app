@@ -1,7 +1,7 @@
 from sqlmodel import Session
 
 from bookstore.db.crud.book.language import create_language
-from bookstore.db.schemas.book.language import LanguageCreate
+from bookstore.db.schemes.book.language import LanguageCreate
 from tests.utils.utils import random_lower_string
 
 

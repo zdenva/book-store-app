@@ -9,7 +9,7 @@ from bookstore.db.crud.book.language import (
     update_language,
 )
 from bookstore.db.deps import SessionDep
-from bookstore.db.schemas.book.language import (
+from bookstore.db.schemes.book.language import (
     LanguageCreate,
     LanguageDelete,
     LanguageRead,

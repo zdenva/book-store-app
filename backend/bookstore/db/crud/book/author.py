@@ -4,7 +4,7 @@ from sqlmodel import Session, select
 
 from bookstore.db.crud.utils import get_count
 from bookstore.db.models.book.author import Author
-from bookstore.db.schemas.book.author import AuthorCreate
+from bookstore.db.schemes.book.author import AuthorCreate
 
 
 def get_authors(session: Session, skip: int = 0, limit: int = 100) -> list[Author]:

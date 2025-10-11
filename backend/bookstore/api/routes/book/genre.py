@@ -9,7 +9,7 @@ from bookstore.db.crud.book.genre import (
     update_genre,
 )
 from bookstore.db.deps import SessionDep
-from bookstore.db.schemas.book.genre import (
+from bookstore.db.schemes.book.genre import (
     GenreCreate,
     GenreDelete,
     GenreRead,

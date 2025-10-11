@@ -4,7 +4,7 @@ from sqlmodel import Session, select
 
 from bookstore.db.crud.utils import get_count
 from bookstore.db.models.book.genre import Genre
-from bookstore.db.schemas.book.genre import GenreCreate
+from bookstore.db.schemes.book.genre import GenreCreate
 
 
 def get_genres(session: Session, skip: int = 0, limit: int = 100) -> list[Genre]:

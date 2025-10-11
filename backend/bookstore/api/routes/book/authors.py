@@ -1,5 +1,4 @@
 from fastapi import APIRouter, HTTPException
-from sqlmodel import func, select
 
 from bookstore.db.crud.book.author import (
     create_author,
@@ -10,8 +9,7 @@ from bookstore.db.crud.book.author import (
     update_author,
 )
 from bookstore.db.deps import SessionDep
-from bookstore.db.models.book.author import Author
-from bookstore.db.schemas.book.author import (
+from bookstore.db.schemes.book.author import (
     AuthorCreate,
     AuthorDelete,
     AuthorRead,

@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 
-from bookstore.api.routes import authors, genre, language, utils
+from bookstore.api.routes import utils
+from bookstore.api.routes.book import authors, genre, language
 
 router = APIRouter()
 

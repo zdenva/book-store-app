@@ -1,7 +1,7 @@
 from sqlmodel import Session
 
 from bookstore.db.crud.book.genre import create_genre
-from bookstore.db.schemas.book.genre import GenreCreate
+from bookstore.db.schemes.book.genre import GenreCreate
 from tests.utils.utils import random_lower_string
 
 

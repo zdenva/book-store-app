@@ -4,7 +4,7 @@ from sqlmodel import Session, select
 
 from bookstore.db.crud.utils import get_count
 from bookstore.db.models.book.language import Language
-from bookstore.db.schemas.book.language import LanguageCreate
+from bookstore.db.schemes.book.language import LanguageCreate
 
 
 def get_languages(session: Session, skip: int = 0, limit: int = 100) -> list[Language]:
