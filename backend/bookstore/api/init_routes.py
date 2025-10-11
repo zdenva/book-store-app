@@ -6,6 +6,7 @@ from bookstore.api.routes.book import (
     book_prices,
     genre,
     inventories,
+    inventory_movements,
     language,
     publishers,
 )
@@ -19,3 +20,4 @@ router.include_router(genre.router)
 router.include_router(publishers.router)
 router.include_router(inventories.router)
 router.include_router(book_prices.router)
+router.include_router(inventory_movements.router)
