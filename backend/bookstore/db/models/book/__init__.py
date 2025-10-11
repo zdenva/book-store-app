@@ -5,3 +5,4 @@ from .inventory import Inventory
 from .inventory_movement import InventoryMovement
 from .language import Language
 from .publisher import Publisher
+from .book_price import BookPrice

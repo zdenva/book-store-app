@@ -26,3 +26,4 @@ class Book(SQLModel, table=True):
     publisher: Optional["Publisher"] = Relationship(back_populates="books")
     inventory_movements: list["InventoryMovement"] = Relationship(back_populates="book")
     inventory: "Inventory" = Relationship(back_populates="book")
+    book_prices: list["BookPrice"] = Relationship(back_populates="book")
