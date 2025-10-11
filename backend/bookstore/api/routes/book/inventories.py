@@ -9,7 +9,7 @@ from bookstore.db.crud.book.inventory import (
     update_inventory,
 )
 from bookstore.db.deps import SessionDep
-from bookstore.db.schemes.book.inventory import (
+from bookstore.db.schemas.book.inventory import (
     InventoriesPublic,
     InventoryRead,
     InventoryUpdate,

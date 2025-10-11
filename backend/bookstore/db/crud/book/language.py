@@ -9,7 +9,7 @@ from bookstore.db.crud.utils import (
     instance_update,
 )
 from bookstore.db.models.book.language import Language
-from bookstore.db.schemes.book.language import (
+from bookstore.db.schemas.book.language import (
     LanguageCreate,
     LanguageUpdate,
 )

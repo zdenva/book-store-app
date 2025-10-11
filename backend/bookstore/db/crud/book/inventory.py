@@ -9,7 +9,7 @@ from bookstore.db.crud.utils import (
     instance_update,
 )
 from bookstore.db.models.book.inventory import Inventory
-from bookstore.db.schemes.book.inventory import InventoryCreate, InventoryUpdate
+from bookstore.db.schemas.book.inventory import InventoryCreate, InventoryUpdate
 
 
 def get_inventories(

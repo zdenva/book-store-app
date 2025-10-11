@@ -9,7 +9,7 @@ from bookstore.db.crud.utils import (
     instance_update,
 )
 from bookstore.db.models.book.genre import Genre
-from bookstore.db.schemes.book.genre import GenreCreate, GenreUpdate
+from bookstore.db.schemas.book.genre import GenreCreate, GenreUpdate
 
 
 def get_genres(session: Session, skip: int = 0, limit: int = 100) -> list[Genre]:

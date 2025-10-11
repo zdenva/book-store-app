@@ -9,7 +9,7 @@ from bookstore.db.crud.utils import (
     instance_update,
 )
 from bookstore.db.models.book.book_price import BookPrice
-from bookstore.db.schemes.book.book_price import BookPriceCreate, BookPriceUpdate
+from bookstore.db.schemas.book.book_price import BookPriceCreate, BookPriceUpdate
 
 
 def get_book_prices(

@@ -9,7 +9,7 @@ from bookstore.db.crud.utils import (
     instance_update,
 )
 from bookstore.db.models.book.publisher import Publisher
-from bookstore.db.schemes.book.publisher import PublisherCreate, PublisherUpdate
+from bookstore.db.schemas.book.publisher import PublisherCreate, PublisherUpdate
 
 
 def get_publishers(

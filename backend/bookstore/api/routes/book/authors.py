@@ -11,7 +11,7 @@ from bookstore.db.crud.book.author import (
     update_author,
 )
 from bookstore.db.deps import SessionDep
-from bookstore.db.schemes.book.author import (
+from bookstore.db.schemas.book.author import (
     AuthorCreate,
     AuthorDelete,
     AuthorRead,

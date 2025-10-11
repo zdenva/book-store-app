@@ -11,7 +11,7 @@ from bookstore.db.crud.book.book_price import (
     update_book_price,
 )
 from bookstore.db.deps import SessionDep
-from bookstore.db.schemes.book.book_price import (
+from bookstore.db.schemas.book.book_price import (
     BookPriceCreate,
     BookPriceDelete,
     BookPriceRead,

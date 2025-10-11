@@ -2,7 +2,7 @@ from sqlmodel import Session
 
 from bookstore.db.crud.book.author import create_author
 from bookstore.db.models.book import Author
-from bookstore.db.schemes.book.author import AuthorCreate
+from bookstore.db.schemas.book.author import AuthorCreate
 from tests.utils.utils import random_lower_string
 
 
