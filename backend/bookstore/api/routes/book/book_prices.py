@@ -19,7 +19,7 @@ from bookstore.db.schemas.book.book_price import (
     BookPriceUpdate,
 )
 
-router = APIRouter(prefix="/book_prices", tags=["book_prices"])
+router = APIRouter(prefix="/book-prices", tags=["book-prices"])
 
 
 @router.get("/", response_model=BookPricesPublic)
