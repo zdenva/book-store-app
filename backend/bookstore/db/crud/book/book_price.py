@@ -1,5 +1,6 @@
 from uuid import UUID
 
+from sqlalchemy.orm import joinedload
 from sqlmodel import Session, select
 
 from bookstore.db.crud.utils import (
@@ -23,7 +24,17 @@ def get_book_prices(
 
 def get_book_price(session: Session, book_price_id: UUID) -> BookPrice | None:
     """Get a book price by ID."""
-    book_price = session.get(BookPrice, book_price_id)
+    book_price = (
+        session.query(BookPrice)
+        .options(
+            joinedload(BookPrice.genres),
+            joinedload(BookPrice.authors),
+            joinedload(BookPrice.language),
+            joinedload(BookPrice.publisher),
+        )
+        .filter(BookPrice.id == book_price_id)
+        .first()
+    )
     return book_price
 
 

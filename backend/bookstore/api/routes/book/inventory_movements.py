@@ -51,12 +51,14 @@ def read_inventory_movement(
 
 @router.post("/", response_model=InventoryMovementRead)
 def add_inventory_movement(
-    genre_in: InventoryMovementCreate, session: SessionDep = SessionDep
+    inventory_movement_in: InventoryMovementCreate, session: SessionDep = SessionDep
 ):
     """
     Create a new inventory movement and return it.
     """
-    inventory_movement = create_inventory_movement(session=session, genre_in=genre_in)
+    inventory_movement = create_inventory_movement(
+        session=session, inventory_movement_in=inventory_movement_in
+    )
     return InventoryMovementRead.from_orm(inventory_movement)
 
 

@@ -3,7 +3,10 @@ from fastapi import APIRouter
 from bookstore.api.routes import utils
 from bookstore.api.routes.book import (
     authors,
+    book_author,
+    book_genre,
     book_prices,
+    books,
     genre,
     inventories,
     inventory_movements,
@@ -23,3 +26,6 @@ router.include_router(inventories.router)
 router.include_router(book_prices.router)
 router.include_router(inventory_movements.router)
 router.include_router(currency.router)
+router.include_router(books.router)
+router.include_router(book_author.router)
+router.include_router(book_genre.router)
