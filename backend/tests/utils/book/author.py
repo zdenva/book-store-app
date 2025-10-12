@@ -11,4 +11,4 @@ def create_random_author(db: Session) -> Author:
     last_name = random_lower_string()
     author_in = AuthorCreate(first_name=first_name, last_name=last_name)
     author = create_author(session=db, author_in=author_in)
-    return author, first_name, last_name
+    return author, author_in

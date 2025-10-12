@@ -9,4 +9,4 @@ def create_random_genre(db: Session):
     name = random_lower_string()
     genre_in = GenreCreate(name=name)
     genre = create_genre(session=db, genre_in=genre_in)
-    return genre, name
+    return genre, genre_in

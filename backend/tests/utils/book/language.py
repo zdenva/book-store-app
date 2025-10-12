@@ -10,4 +10,4 @@ def create_random_language(db: Session):
     code = random_lower_string(leng=2)
     language_in = LanguageCreate(name=name, code=code)
     language = create_language(session=db, language_in=language_in)
-    return language, name, code
+    return language, language_in
