@@ -1,5 +1,8 @@
+from uuid import UUID
+
 from pydantic import BaseModel
 from sqlmodel import Session, SQLModel, func, select
+from sqlalchemy import exists
 
 
 def get_count(session: Session, model: SQLModel) -> int:
@@ -38,3 +41,10 @@ def instance_delete(session: Session, instance):
     session.delete(instance)
     session.commit()
     return instance
+
+
+def check_instance_exists(session: Session, model: SQLModel, instance_id: UUID) -> bool:
+    """Check if instance exists"""
+    statement = select(exists().where(model.id == instance_id))
+    result = session.exec(statement).one()
+    return result

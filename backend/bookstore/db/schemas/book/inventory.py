@@ -21,10 +21,6 @@ class InventoryRead(BaseModel):
         from_attributes = True
 
 
-class InventoryDelete(BaseModel):
-    book_id: uuid.UUID
-
-
 class InventoriesPublic(BaseModel):
     data: list[InventoryRead]
     count: int

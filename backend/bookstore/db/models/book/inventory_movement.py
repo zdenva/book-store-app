@@ -11,5 +11,6 @@ class InventoryMovement(SQLModel, table=True):
     book_id: uuid.UUID = Field(foreign_key="book.id")
     change: int
     movement_date: datetime = Field(default_factory=datetime.utcnow)
+    note: Optional[str] = Field(default=None)
 
     book: Optional["Book"] = Relationship(back_populates="inventory_movements")

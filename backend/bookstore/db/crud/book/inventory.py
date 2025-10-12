@@ -5,7 +5,6 @@ from sqlmodel import Session, select
 from bookstore.db.crud.utils import (
     get_count,
     instance_create,
-    instance_delete,
     instance_update,
 )
 from bookstore.db.models.book.inventory import Inventory
@@ -37,22 +36,23 @@ def create_inventory(
     return inventory_created
 
 
+def update_inventory_quantity(session: Session, book_id: UUID, change: int):
+    """Update quantity."""
+    inventory = get_inventory(session=session, book_id=book_id)
+    calculated_change = inventory.quantity + change
+    inventory_in = InventoryUpdate(book_id=book_id, quantity=calculated_change)
+    update_inventory(session=session, book_id=book_id, inventory_in=inventory_in)
+
+
 def update_inventory(
     session: Session, book_id: UUID, inventory_in=InventoryUpdate
 ) -> Inventory | None:
     """Update an inventory by ID."""
     inventory = get_inventory(session=session, book_id=book_id)
     inventory_updated = instance_update(
-        session=Session, instance=inventory, schema_in=inventory_in
+        session=session, instance=inventory, schema_in=inventory_in
     )
     return inventory_updated
-
-
-def delete_inventory(session: Session, book_id: UUID) -> Inventory:
-    """Delete an inventory by ID."""
-    inventory = get_inventory(session=session, book_id=book_id)
-    delete_inventory = instance_delete(session=Session, instance=inventory)
-    return delete_inventory
 
 
 def get_count_inventories(session: Session) -> int:

@@ -6,7 +6,6 @@ from sqlmodel import Session, select
 from bookstore.db.crud.utils import (
     get_count,
     instance_create,
-    instance_delete,
     instance_update,
 )
 from bookstore.db.models.book.book import Book
@@ -47,13 +46,6 @@ def update_book(session: Session, book_id: UUID, book_in: BookUpdate) -> Book | 
     book = get_book(session=session, book_id=book_id)
     book_updated = instance_update(session=session, instance=book, schema_in=book_in)
     return book_updated
-
-
-def delete_book(session: Session, book_id: UUID) -> Book | None:
-    """Delete a book by ID."""
-    book = get_book(session=session, book_id=book_id)
-    book_deleted = instance_delete(session=session, instance=book)
-    return book_deleted
 
 
 def get_count_books(session: Session) -> int:

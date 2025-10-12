@@ -6,13 +6,11 @@ from bookstore.db.crud.book.inventory import (
     get_count_inventories,
     get_inventories,
     get_inventory,
-    update_inventory,
 )
 from bookstore.db.deps import SessionDep
 from bookstore.db.schemas.book.inventory import (
     InventoriesPublic,
     InventoryRead,
-    InventoryUpdate,
 )
 
 router = APIRouter(prefix="/inventories", tags=["inventories"])
@@ -33,18 +31,3 @@ def read_inventory(book_id: UUID, session: SessionDep = SessionDep):
     if not inventory:
         raise HTTPException(status_code=404, detail="Inventory not found")
     return inventory
-
-
-@router.patch("/{book_id}", response_model=InventoryRead)
-def edit_inventory(session: SessionDep, book_id: UUID, inventory_in: InventoryUpdate):
-    """
-    Update an inventory by ID.
-    """
-    inventory = update_inventory(
-        session=session,
-        book_id=book_id,
-        inventory_in=inventory_in,
-    )
-    if not inventory:
-        raise HTTPException(status_code=404, detail="Inventory not found")
-    return InventoryRead.from_orm(inventory)

@@ -11,6 +11,7 @@ from bookstore.db.models.book.book_genre import BookGenre
 class Book(SQLModel, table=True):
     id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
     title: str = Field(max_length=255)
+    description: Optional[str] = Field(default=None)
     isbn: Optional[str] = Field(default=None, unique=True, index=True, max_length=13)
     num_pages: Optional[int] = Field(default=None)
     language_id: uuid.UUID = Field(foreign_key="language.id")

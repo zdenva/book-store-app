@@ -4,23 +4,20 @@ from fastapi import APIRouter, HTTPException
 
 from bookstore.db.crud.book.book import (
     create_book,
-    delete_book,
     get_book,
     get_books,
     get_count_books,
     update_book,
 )
 from bookstore.db.crud.book.inventory import create_inventory
-from bookstore.db.schemas.book.inventory import InventoryCreate
-
 from bookstore.db.deps import SessionDep
 from bookstore.db.schemas.book.book import (
     BookCreate,
-    BookDelete,
     BookRead,
     BooksPublic,
     BookUpdate,
 )
+from bookstore.db.schemas.book.inventory import InventoryCreate
 
 router = APIRouter(prefix="/books", tags=["books"])
 
@@ -63,16 +60,3 @@ def edit_book(session: SessionDep, book_id: UUID, book_in: BookUpdate):
     if not book:
         raise HTTPException(status_code=404, detail="Book not found")
     return BookRead.from_orm(book)
-
-
-@router.delete("/{book_id}", response_model=BookDelete)
-def remove_book(book_id: UUID, session: SessionDep = SessionDep):
-    """Delete a book by ID."""
-    deleted_book = delete_book(session=session, book_id=book_id)
-    if not deleted_book:
-        raise HTTPException(status_code=404, detail="Book not found")
-
-    return BookDelete(
-        id=deleted_book.id,
-        message=f"Book '{deleted_book.name}' was successfully deleted",
-    )

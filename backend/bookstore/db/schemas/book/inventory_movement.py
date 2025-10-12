@@ -1,29 +1,22 @@
-import uuid
 from datetime import datetime
 from typing import Optional
+from uuid import UUID
 
 from pydantic import BaseModel
 
 
 class InventoryMovementCreate(BaseModel):
-    book_id: uuid.UUID
+    book_id: UUID
     change: int
-    movement_date: datetime
-
-
-class InventoryMovementUpdate(BaseModel):
-    book_id: Optional[uuid.UUID] = None
-    change: Optional[int] = None
-    movement_date: Optional[datetime] = None
+    note: Optional[str] = None
 
 
 class InventoryMovementRead(InventoryMovementCreate):
+    id: UUID
+    movement_date: datetime
+
     class Config:
         from_attributes = True
-
-
-class InventoryMovementDelete(BaseModel):
-    id: uuid.UUID
 
 
 class InventoryMovementsPublic(BaseModel):

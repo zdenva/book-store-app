@@ -12,6 +12,7 @@ from bookstore.db.schemas.book.publisher import PublisherRead
 
 class BookBase(BaseModel):
     title: str = Field(max_length=255)
+    description: Optional[str] = None
     isbn: Optional[str] = Field(max_length=13)
     num_pages: Optional[int] = None
     language_id: uuid.UUID
@@ -25,6 +26,7 @@ class BookCreate(BookBase):
 
 class BookUpdate(BaseModel):
     title: Optional[str] = Field(default=None, max_length=255)
+    description: Optional[str] = None
     isbn: Optional[str] = Field(default=None, max_length=13)
     num_pages: Optional[int] = None
     language_id: Optional[uuid.UUID] = None
@@ -35,6 +37,7 @@ class BookUpdate(BaseModel):
 class BookRead(BaseModel):
     id: uuid.UUID
     title: str = Field(max_length=255)
+    description: Optional[str]
     isbn: Optional[str] = Field(max_length=13)
     num_pages: Optional[int] = None
     language: LanguageRead
