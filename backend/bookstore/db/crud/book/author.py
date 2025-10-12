@@ -27,7 +27,7 @@ def get_author(session: Session, author_id: UUID) -> Author | None:
 
 def create_author(session: Session, author_in: AuthorCreate) -> Author:
     """Create a new author."""
-    author = instance_create(session=session, instance=Author, schema_in=author_in)
+    author = instance_create(session=session, model=Author, schema_in=author_in)
     return author
 
 

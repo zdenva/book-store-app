@@ -22,11 +22,14 @@ def add_book_author(book_author_in: BookAuthorCreate, session: SessionDep = Sess
     return BookAuthorRead.from_orm(book_author)
 
 
-@router.delete("/{book_author_id}", response_model=BookAuthorDelete)
-def remove_book_author(book_author_id: UUID, session: SessionDep = SessionDep):
+@router.delete("/", response_model=BookAuthorDelete)
+def remove_book_author(
+    book_id: UUID, author_id: UUID, session: SessionDep = SessionDep
+):
     """Delete a book author by ID."""
+    book_genre_in = BookAuthorDelete(book_id=book_id, author_id=author_id)
     deleted_book_author = delete_book_author(
-        session=session, book_author_id=book_author_id
+        session=session, book_genre_in=book_genre_in
     )
 
     if not deleted_book_author:
