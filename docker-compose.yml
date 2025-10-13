@@ -91,5 +91,18 @@ services:
     build:
       context: ./backend
 
+  frontend:
+    image: "${DOCKER_IMAGE_FRONTEND?Variable not set}:${TAG-latest}"
+    restart: always
+    ports:
+      - "3000:3000"
+    networks:
+      - default
+    env_file:
+      - .env
+    build:
+      context: ./frontend
+  
+
 volumes:
   bookstore-db-data:
